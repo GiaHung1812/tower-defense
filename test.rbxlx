@@ -1,0 +1,86 @@
+<roblox version="4">
+  <Item class="ReplicatedStorage" referent="0">
+    <Properties>
+      <string name="Name">ReplicatedStorage</string>
+    </Properties>
+    <Item class="Folder" referent="1">
+      <Properties>
+        <string name="Name">Shared</string>
+      </Properties>
+    </Item>
+  </Item>
+  <Item class="ServerScriptService" referent="2">
+    <Properties>
+      <string name="Name">ServerScriptService</string>
+    </Properties>
+    <Item class="Folder" referent="3">
+      <Properties>
+        <string name="Name">Server</string>
+      </Properties>
+      <Item class="Folder" referent="4">
+        <Properties>
+          <string name="Name">Drooling Zombie</string>
+        </Properties>
+        <Item class="Script" referent="5">
+          <Properties>
+            <string name="Name">ZombieScript</string>
+            <token name="RunContext">0</token>
+            <string name="Source"><![CDATA[local zombie = workspace:WaitForChild("Drooling Zombie")
+local waypoints = workspace.Waypoitns
+
+for waypoint = 1, #waypoints:GetChildren() do
+	zombie.Humanoid:MoveTo(waypoints[waypoint].Position)
+	zombie.Humanoid.MoveToFinished:Wait()
+end
+]]></string>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="Script" referent="6">
+        <Properties>
+          <string name="Name">Main</string>
+          <token name="RunContext">0</token>
+          <string name="Source"><![CDATA[local mob = require(script.Parent.Modules.Mob)
+
+mob.Spawn("Zombie", "Grassland Map")
+]]></string>
+        </Properties>
+      </Item>
+      <Item class="Folder" referent="7">
+        <Properties>
+          <string name="Name">Modules</string>
+        </Properties>
+        <Item class="ModuleScript" referent="8">
+          <Properties>
+            <string name="Name">Mob</string>
+            <string name="Source"><![CDATA[local mob = {}
+
+function mob.Spawn(name, map)
+	print(name, map)
+end
+
+return mob
+]]></string>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+  </Item>
+  <Item class="StarterPlayer" referent="9">
+    <Properties>
+      <string name="Name">StarterPlayer</string>
+    </Properties>
+    <Item class="StarterPlayerScripts" referent="10">
+      <Properties>
+        <string name="Name">StarterPlayerScripts</string>
+      </Properties>
+      <Item class="LocalScript" referent="11">
+        <Properties>
+          <string name="Name">Client</string>
+          <string name="Source"><![CDATA[print("Hello world, from client!")
+]]></string>
+        </Properties>
+      </Item>
+    </Item>
+  </Item>
+</roblox>

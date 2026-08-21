@@ -1,5 +1,5 @@
+local PhysicsService = game:GetService("PhysicsService")
 local ServerStorage = game:GetService("ServerStorage")
-
 local mob = {}
 
 function mob.Move(mob, map)
@@ -20,13 +20,19 @@ end
 
 function mob.Spawn(name, quantity, map)
 	local mobExists = ServerStorage.Mobs:FindFirstChild(name)
-
 	if mobExists then
 		for i = 1, quantity do
 			task.wait(0.5)
 			local newMob = mobExists:Clone()
 			newMob.HumanoidRootPart.CFrame = map.Start.CFrame
-			newMob.Parent = map.Mob
+			newMob.Parent = workspace.Mobs
+			newMob.HumanoidRootPart:SetNetworkOwner(nil)
+
+			for i, object in ipairs(newMob:GetDescendants()) do
+				if object:IsA("BasePart") then
+					object.CollisionGroup = "Mob"
+				end
+			end
 
 			task.spawn(function()
 				mob.Move(newMob, map)
